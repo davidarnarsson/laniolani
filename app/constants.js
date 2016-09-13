@@ -1,0 +1,6 @@
+export const LENDER_ADD = 'LENDER_ADD'
+export const LENDER_EDIT = 'LENDER_EDIT'
+export const MONTH_SET = 'MONTH_SET'
+export const RESULTS_SET = 'RESULTS_SET'
+export const INTEREST_SET = 'INTEREST_SET'
+export const LENDER_SET_EDIT = 'LENDER_SET_EDIT'

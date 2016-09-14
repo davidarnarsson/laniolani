@@ -1,6 +1,6 @@
 import React from 'react'
 import {format} from '../utils'
-
+import {connect} from 'react-redux'
 
 const Results = ({ results, lenders, months }) => {
   const sumWithoutInterest = lenders.reduce((s, l) => s + l.amount, 0);
@@ -50,4 +50,12 @@ const Results = ({ results, lenders, months }) => {
   )
 }
 
-export default Results
+const mapState = (state) => {
+  return {
+    results: state.results,
+    lenders: state.lenders,
+    months: state.month
+  }
+}
+
+export default connect(mapState)(Results)

@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { setMonth } from '../actions'
+import {connect} from 'react-redux'
 
 const MonthsSelector = ({month, onSelectMonth}) => {
   return (
@@ -10,5 +11,16 @@ const MonthsSelector = ({month, onSelectMonth}) => {
   )
 }
 
+const mapState = (state) => {
+  return {
+    month: state.month
+  }
+};
 
-export default MonthsSelector
+const mapDispatch = (dispatch) => {
+  return {
+    onSelectMonth: month => dispatch(setMonth(month))
+  }
+}
+
+export default connect(mapState, mapDispatch)(MonthsSelector);

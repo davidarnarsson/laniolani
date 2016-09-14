@@ -1,5 +1,7 @@
 import React from 'react'
 import {format} from '../utils'
+import {connect} from 'react-redux'
+import { addLender, editLender, removeLender, setEditLender } from '../actions'
 
 const Lender = ({ lender, onChange, onToggleEdit, onRemoveLender }) => {
   let amountRef, nameRef
@@ -35,7 +37,7 @@ const NewLenderForm = ({ onSubmit }) => {
 
   return (
     
-    <form onSubmit={e => { e.preventDefault(); onSubmit(nameRef.value, amountRef.value) }}>
+    <form onSubmit={e => { e.preventDefault(); onSubmit(nameRef.value, amountRef.value); e.target.reset(); }}>
     <h3>Lánadróttnar</h3>
       <div className="inline-inputs">
         <input type="text" placeholder="Nafn lánadróttins" ref={r => nameRef = r} />
@@ -63,4 +65,19 @@ const Lenders = ({ lenders, onLenderEdit, onNewLender, onToggleEdit, onRemoveLen
   )
 };
 
-export default Lenders
+const mapState = (state) => {
+  return {
+    lenders: state.lenders
+  }
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    onLenderEdit: (id, name, amount) => dispatch(editLender(id, name, amount)),
+    onNewLender: (name, amount) => dispatch(addLender(name, amount)),
+    onToggleEdit: (id) => dispatch(setEditLender(id)),
+    onRemoveLender: id => dispatch(removeLender(id))
+  }
+} 
+
+export default connect(mapState, mapDispatch)(Lenders)

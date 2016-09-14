@@ -10,18 +10,19 @@ import {connect} from 'react-redux'
 import {
   addLender
   , editLender
+  , removeLender
   , setEditLender
   , setMonth
   , setInterest
 } from '../actions'
 
-const App = ({ lenders, onLenderEdit, onLenderAdd, onMonth, month, results, interest, onSetInterest, onToggleEdit }) => {
+const App = ({ lenders, onLenderEdit, onLenderAdd, onMonth, month, results, interest, onSetInterest, onToggleEdit, onRemoveLender }) => {
   return (
     <div>
       <h1>Lánareikningur!</h1>
       <div className="row">
         <div className="col">
-            <Lenders lenders={lenders} onLenderEdit={onLenderEdit} onNewLender={onLenderAdd} onToggleEdit={onToggleEdit} />
+            <Lenders lenders={lenders} onLenderEdit={onLenderEdit} onNewLender={onLenderAdd} onToggleEdit={onToggleEdit} onRemoveLender={onRemoveLender} />
         </div>
         <div className="col">
           <div className="row">
@@ -58,7 +59,8 @@ const mapDispatch = (dispatch) => {
     onLenderAdd: (name, amount) => dispatch(addLender(name, amount)),
     onToggleEdit: (id) => dispatch(setEditLender(id)),
     onMonth: (month) => dispatch(setMonth(month)),
-    onSetInterest: interest => dispatch(setInterest(interest))
+    onSetInterest: interest => dispatch(setInterest(interest)),
+    onRemoveLender: id => dispatch(removeLender(id))
   }
 };
 

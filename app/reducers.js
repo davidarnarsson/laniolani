@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import {
-  LENDER_ADD
+  LENDER_REMOVE
+  , LENDER_ADD
   , LENDER_EDIT
   , LENDER_SET_EDIT
   , MONTH_SET
@@ -32,7 +33,12 @@ const LenderDefaultState = {
 const lendersHandlers = {
   [LENDER_ADD]: (state, action) => [...state, lender(state, action)],
   [LENDER_EDIT]: (state, action) => state.map(x => lender(x, action)),
-  [LENDER_SET_EDIT]: (state, action) => state.map(x => lender(x, action))
+  [LENDER_SET_EDIT]: (state, action) => state.map(x => lender(x, action)),
+  [LENDER_REMOVE]: (state, action) => {
+    var idx = state.indexOf(state.find(x => x.id === action.id)); 
+    
+    return [...state.slice(0, idx), ...state.slice(idx + 1)];
+  } 
 };
 
 const lenders = createReducer(LendersDefaultState, lendersHandlers);

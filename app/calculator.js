@@ -22,7 +22,7 @@ export default function calculate(lenders, months, interest) {
       requestId: newId(),
       lenders,
       months,
-      interest: parseFloat(interest)
+      interest: Math.max(0.00001, parseFloat(interest))
     };
     
     callbacks[payload.requestId] = resolve;

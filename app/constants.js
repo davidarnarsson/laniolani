@@ -1,3 +1,4 @@
+export const LENDER_REMOVE = 'LENDER_REMOVE'
 export const LENDER_ADD = 'LENDER_ADD'
 export const LENDER_EDIT = 'LENDER_EDIT'
 export const MONTH_SET = 'MONTH_SET'

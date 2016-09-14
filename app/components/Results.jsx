@@ -25,33 +25,25 @@ const Results = ({ results, lenders, months }) => {
           </tr>
         </thead>
         <tbody> 
+
           {results.map((r, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
               {r.breakdown.map(b => (<td key={b.name}>{format(b.amount)}</td>))}
-              <td>{format(r.total)}</td>
+              <td className="totals">{format(r.total)}</td>
               <td>{format(r.total - monthlySumWithoutInterest)}</td>
             </tr>
           ))}
+
         </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={1 + lenders.length}></td>
-            <td>Samtals</td>
-            <td>{format(sum)}</td>
-          </tr>
-          <tr>
-            <td colSpan={1 + lenders.length}></td>
-            <td>Án vaxta</td>
-            <td>{format(sumWithoutInterest)}</td>
-          </tr>
-          <tr>
-            <td colSpan={1 + lenders.length}></td>
-            <td>Samtals vextir:</td>
-            <td>{format(sum - sumWithoutInterest)}</td>
-          </tr>
-        </tfoot>
       </table>
+
+      <ul className="totals">
+        <li> <strong>Samtals</strong> <span className="amt">{format(sum)}</span></li>
+        <li> <strong>Án vaxta</strong> <span className="amt">{format(sumWithoutInterest)}</span></li>
+        <li> <strong>Samtals vextir</strong> <span className="amt">{format(sum - sumWithoutInterest)}</span></li>
+      </ul>
+
 
     </div>
     

@@ -1,4 +1,5 @@
 import {
+  LENDER_REMOVE,
   LENDER_ADD,
   LENDER_SET_EDIT,
   LENDER_EDIT,
@@ -17,13 +18,12 @@ function asReactive(fn) {
       const { lenders, month, interest } = getState();
 
       calculateResults(lenders, month, interest)
-        .then(rs => {
-          console.log(rs)
-          dispatch(setResults(rs))
-        });
+        .then(rs => dispatch(setResults(rs)))
     }
   }
 }
+
+export const removeLender = asReactive((id) => ({ id, type: LENDER_REMOVE }))
 
 export const addLender = asReactive((name, amount) => ({ name,  amount, type: LENDER_ADD }));
 

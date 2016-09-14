@@ -1,7 +1,7 @@
 import React from 'react'
 import {format} from '../utils'
 
-const Lender = ({ lender, onChange, onToggleEdit }) => {
+const Lender = ({ lender, onChange, onToggleEdit, onRemoveLender }) => {
   let amountRef, nameRef
 
   return (
@@ -14,8 +14,10 @@ const Lender = ({ lender, onChange, onToggleEdit }) => {
           <div className="lender-amount">
             {format(lender.amount)}
           </div>
+          <button className="remove-lender" onClick={_ => onRemoveLender(lender.id)}>&times;</button>
         </div> 
       </div>
+
       <form style={{ display: !lender.editing ? 'none' : 'block' }} 
             onSubmit={(e) => { e.preventDefault(); onChange(lender.id, nameRef.value, amountRef.value) } }>
         <span className="inline-inputs"> 
@@ -46,14 +48,17 @@ const NewLenderForm = ({ onSubmit }) => {
   );
 };
 
-const Lenders = ({ lenders, onLenderEdit, onNewLender, onToggleEdit }) => {
+const Lenders = ({ lenders, onLenderEdit, onNewLender, onToggleEdit, onRemoveLender }) => {
   return (
     <div className="lenders">
-      <ul className="lenders-list">
-        {lenders.map(l => <Lender lender={l} key={l.name} onChange={onLenderEdit} onToggleEdit={onToggleEdit} />) }
-      </ul>
-
       <NewLenderForm onSubmit={onNewLender} />
+
+      <div className="box">
+        <h3>Skráðir lánadróttnar</h3>
+        <ul className="lenders-list">
+          {lenders.map(l => <Lender lender={l} key={l.name} onChange={onLenderEdit} onToggleEdit={onToggleEdit} onRemoveLender={onRemoveLender} />) }
+        </ul>
+      </div>
     </div>
   )
 };

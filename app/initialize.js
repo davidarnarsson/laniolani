@@ -1,14 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk'
-import rootReducer, { LendersDefaultState, MonthDefaultState, ResultsDefaultState } from './reducers';
 import App from 'components/App';
+import initStore from './store'
 
-const THEMUTHAFUCKENSTATEBISH = localStorage.getItem('ze-state') != null ? JSON.parse(localStorage.getItem('ze-state')) : undefined;
-
-const store = createStore(rootReducer, THEMUTHAFUCKENSTATEBISH, applyMiddleware(thunk));
+const store = initStore(JSON.parse(localStorage.getItem('ze-state')) || undefined);
 
 store.subscribe(() => {
   let state = store.getState()
